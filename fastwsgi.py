@@ -4,9 +4,9 @@ import signal
 import importlib
 import click
 import _fastwsgi
-from pkg_resources import get_distribution
+import importlib.metadata
 
-__version__ = get_distribution("fastwsgi").version
+__version__ = importlib.metadata.version("fastwsgi")
 
 LL_DISABLED    = 0
 LL_FATAL_ERROR = 1
@@ -121,7 +121,7 @@ def import_from_string(import_str):
 # -------------------------------------------------------------------------------------
 
 @click.command()
-@click.version_option(version=get_distribution("fastwsgi").version, message="%(version)s")
+@click.version_option(version=__version__, message="%(version)s")
 @click.option("--host", help="Host the socket is bound to.", type=str, default=server.host, show_default=True)
 @click.option("-p", "--port", help="Port the socket is bound to.", type=int, default=server.port, show_default=True)
 @click.option("-l", "--loglevel", help="Logging level.", type=int, default=server.loglevel, show_default=True)
